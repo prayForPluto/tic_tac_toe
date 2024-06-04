@@ -1,4 +1,4 @@
-/* //Create gameBoard factory
+//Create gameBoard factory
 const gameBoard = (function () {
     
     //A 2D array will be used as the squares of a tic-tac-toe game
@@ -24,11 +24,16 @@ function createPlayer(playerName, playerToken) {
 function playTicTacToe() {
     const players = [createPlayer("playerOne", "X"), createPlayer("playerTwo", "O")];
     
-    const checkWin = (function() {
-        for (let i = 0; i <= 4; i++) {
-            console.log("here")
+    const checkWin = () => {
+      for (let i = 0; i < 3; i++) {
+        for (let j = 0; i < 3; i++) {
+          //check if first in row has 3 consecutive tokens the same
+          let firstToken = [i][j];
+          
+          
         }
-    })();
+      }
+    }
 
     gameBoard.placePiece(players[0], 0, 0)   
 
@@ -36,7 +41,7 @@ function playTicTacToe() {
     console.log(gameBoard); 
 }
 
-const playGame = playTicTacToe(); */
+const playGame = playTicTacToe(); 
 
 /*
 ** The Gameboard represents the state of the board
@@ -44,7 +49,7 @@ const playGame = playTicTacToe(); */
 ** and we expose a dropToken method to be able to add Cells to squares
 */
 
-function Gameboard() {
+/*function Gameboard() {
     const rows = 6;
     const columns = 7;
     const board = [];
@@ -95,12 +100,12 @@ function Gameboard() {
     return { getBoard, dropToken, printBoard };
   }
   
-  /*
+  
   ** A Cell represents one "square" on the board and can have one of
   ** 0: no token is in the square,
   ** 1: Player One's token,
   ** 2: Player 2's token
-  */
+  
   
   function Cell() {
     let value = 0;
@@ -119,11 +124,11 @@ function Gameboard() {
     };
   }
   
-  /* 
+   
   ** The GameController will be responsible for controlling the 
   ** flow and state of the game's turns, as well as whether
   ** anybody has won the game
-  */
+  
   function GameController(
     playerOneName = "Player One",
     playerTwoName = "Player Two"
@@ -161,7 +166,7 @@ function Gameboard() {
       board.dropToken(column, getActivePlayer().token);
   
       /*  This is where we would check for a winner and handle that logic,
-          such as a win message. */
+          such as a win message. 
   
       // Switch player turn
       switchPlayerTurn();
@@ -179,4 +184,4 @@ function Gameboard() {
     };
   }
   
-  const game = GameController();
+  const game = GameController(); */
