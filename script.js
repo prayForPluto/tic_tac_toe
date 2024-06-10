@@ -1,17 +1,4 @@
-//Create gameBoard factory
-const gameBoard = (function () {
-    
-    //A 2D array will be used as the squares of a tic-tac-toe game
-    const board = [
-        ["", "", ""],
-        ["", "", ""],
-        ["", "", ""]
-    ];
-    const placePiece = (player, locationX, locationY) => board[locationX][locationY] = player.getToken(); 
 
-    return { board, placePiece };
-
-})();
 
 function createPlayer(playerName, playerToken) {
     const name = playerName;
@@ -22,8 +9,39 @@ function createPlayer(playerName, playerToken) {
 }
 
 function playTicTacToe() {
+    //Create gameBoard factory
+    const gameBoard = (function () {
+        
+      //A 2D array will be used as the squares of a tic-tac-toe game
+      const board = [
+          ["", "", ""],
+          ["", "", ""],
+          ["", "", ""]
+      ];
+      const placePiece = (player, locationX, locationY) => board[locationX][locationY] = getActivePlayer().token; 
+
+      return { board, placePiece };
+
+    })();
     const players = [createPlayer("playerOne", "X"), createPlayer("playerTwo", "O")];
-    
+
+    let activePlayer = players[0];
+
+    const switchPlayerTurn = () => {
+      activePlayer = activePlayer === players[0] ? players[1] : players[0];
+    };
+    const getActivePlayer = () => activePlayer;
+
+    const playRound = () => {
+      let locX = prompt("Pick a row: ")
+      let locY = prompt("Pick a column: ")
+
+      gameBoard.placePiece(getActivePlayer(), locX, locY);
+      switchPlayerTurn();
+
+      console.log(gameBoard);
+    }
+
     const checkWin = () => {
       for (let i = 0; i < 3; i++) {
         for (let j = 0; i < 3; i++) {
@@ -35,10 +53,7 @@ function playTicTacToe() {
       }
     }
 
-    gameBoard.placePiece(players[0], 0, 0)   
-
-
-    console.log(gameBoard); 
+    return { playRound }
 }
 
 const playGame = playTicTacToe(); 
@@ -47,9 +62,9 @@ const playGame = playTicTacToe();
 ** The Gameboard represents the state of the board
 ** Each equare holds a Cell (defined later)
 ** and we expose a dropToken method to be able to add Cells to squares
-*/
 
-/*function Gameboard() {
+
+function Gameboard() {
     const rows = 6;
     const columns = 7;
     const board = [];
@@ -165,8 +180,8 @@ const playGame = playTicTacToe();
       );
       board.dropToken(column, getActivePlayer().token);
   
-      /*  This is where we would check for a winner and handle that logic,
-          such as a win message. 
+      //  This is where we would check for a winner and handle that logic,
+      //    such as a win message. 
   
       // Switch player turn
       switchPlayerTurn();
