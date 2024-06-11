@@ -9,6 +9,11 @@ function createPlayer(playerName, playerToken) {
 }
 
 function playTicTacToe() {
+    /* A turn variable keeps track of how many turns have passed
+    so that we can start checking the win condition after 5 
+    turns have passed */
+    let turn = 0;
+
     //Create gameBoard factory
     const gameBoard = (function () {
         
@@ -40,6 +45,7 @@ function playTicTacToe() {
       switchPlayerTurn();
 
       console.log(gameBoard);
+      turn += 1;
     }
 
     const checkWin = () => {
