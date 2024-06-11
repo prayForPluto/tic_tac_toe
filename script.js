@@ -9,23 +9,25 @@ function createPlayer(playerName, playerToken) {
 }
 
 function playTicTacToe() {
-    /* A turn variable keeps track of how many turns have passed
-    so that we can start checking the win condition after 5 
-    turns have passed */
-    let turn = 0;
-
     //Create gameBoard factory
     const gameBoard = (function () {
         
+      /* A turn variable keeps track of how many turns have passed
+      so that we can start checking the win condition after 5 
+      turns have passed */
+      let turn = 0;
+
       //A 2D array will be used as the squares of a tic-tac-toe game
       const board = [
           ["", "", ""],
           ["", "", ""],
           ["", "", ""]
       ];
-      const placePiece = (player, locationX, locationY) => board[locationX][locationY] = getActivePlayer().token; 
+      const placePiece = (locationX, locationY) => board[locationX][locationY] = getActivePlayer().token; 
 
-      return { board, placePiece };
+      const addTurn = () => {turn += 1}
+
+      return { board, placePiece, addTurn };
 
     })();
     const players = [createPlayer("playerOne", "X"), createPlayer("playerTwo", "O")];
@@ -41,18 +43,21 @@ function playTicTacToe() {
       let locX = prompt("Pick a row: ")
       let locY = prompt("Pick a column: ")
 
-      gameBoard.placePiece(getActivePlayer(), locX, locY);
+      gameBoard.placePiece(locX, locY);
       switchPlayerTurn();
 
       console.log(gameBoard);
-      turn += 1;
+      gameBoard.addTurn;
     }
 
     const checkWin = () => {
+      let startToken = "";
       for (let i = 0; i < 3; i++) {
         for (let j = 0; i < 3; i++) {
           //check if first in row has 3 consecutive tokens the same
-          let firstToken = [i][j];
+          if (i == 0) {
+            startToken = board[i][j];
+          }
           
           
         }
