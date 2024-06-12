@@ -55,10 +55,15 @@ function playTicTacToe() {
       for (let i = 0; i < 3; i++) {
         for (let j = 0; i < 3; i++) {
           //check if first in row has 3 consecutive tokens the same
-          if (i == 0) {
+          if (j == 0) {
             startToken = board[i][j];
+            continue;
           }
-          
+          if (startToken == board[i][j]) {
+            continue;
+          } else {
+            break;
+          }
           
         }
       }
