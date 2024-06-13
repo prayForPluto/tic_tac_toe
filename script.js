@@ -26,8 +26,9 @@ function playTicTacToe() {
       const placePiece = (locationX, locationY) => board[locationX][locationY] = getActivePlayer().token; 
 
       const addTurn = () => {turn += 1}
+      const getTurn = () => turn;
 
-      return { board, placePiece, addTurn };
+      return { board, placePiece, addTurn, getTurn };
 
     })();
     const players = [createPlayer("playerOne", "X"), createPlayer("playerTwo", "O")];
@@ -40,6 +41,7 @@ function playTicTacToe() {
     const getActivePlayer = () => activePlayer;
 
     const playRound = () => {
+      gameBoard.addTurn;
       let locX = prompt("Pick a row: ")
       let locY = prompt("Pick a column: ")
 
@@ -47,24 +49,33 @@ function playTicTacToe() {
       switchPlayerTurn();
 
       console.log(gameBoard);
-      gameBoard.addTurn;
+      
+      if (gameBoard.getTurn() > 5) {
+        checkWin();
+      }
     }
 
     const checkWin = () => {
       let startToken = "";
       for (let i = 0; i < 3; i++) {
+        let count = 0;
         for (let j = 0; i < 3; i++) {
           //check if first in row has 3 consecutive tokens the same
           if (j == 0) {
             startToken = board[i][j];
+            count += 1;
             continue;
           }
           if (startToken == board[i][j]) {
+            count += 1;
             continue;
           } else {
             break;
           }
           
+        }
+        if (count == 3) {
+          console.log("Game over!")
         }
       }
     }
