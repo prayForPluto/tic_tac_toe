@@ -27,8 +27,9 @@ function playTicTacToe() {
 
       const addTurn = () => {turn += 1}
       const getTurn = () => turn;
+      const getBoard = () => board;
 
-      return { board, placePiece, addTurn, getTurn };
+      return { board, placePiece, addTurn, getTurn, getBoard };
 
     })();
     const players = [createPlayer("playerOne", "X"), createPlayer("playerTwo", "O")];
@@ -41,7 +42,7 @@ function playTicTacToe() {
     const getActivePlayer = () => activePlayer;
 
     const playRound = () => {
-      gameBoard.addTurn;
+      gameBoard.addTurn();
       let locX = prompt("Pick a row: ")
       let locY = prompt("Pick a column: ")
 
@@ -49,33 +50,37 @@ function playTicTacToe() {
       switchPlayerTurn();
 
       console.log(gameBoard);
-      
+      console.log(`The turn is: ${gameBoard.getTurn()}`)
       if (gameBoard.getTurn() > 5) {
         checkWin();
       }
     }
 
     const checkWin = () => {
-      let startToken = "";
+      let startTokenHorizontal = "";
+      let boardChecked = gameBoard.getBoard();
       for (let i = 0; i < 3; i++) {
-        let count = 0;
-        for (let j = 0; i < 3; i++) {
+        let trueHorizontal = false;
+        let trueVertical = false;
+        for (let j = 0; i < 3; j++) {
           //check if first in row has 3 consecutive tokens the same
           if (j == 0) {
-            startToken = board[i][j];
-            count += 1;
+            startTokenHorizontal = boardChecked[i][j];
+            trueHorizontal = true;
+            console.log(startTokenHorizontal)
             continue;
           }
-          if (startToken == board[i][j]) {
-            count += 1;
-            continue;
+          if (startTokenHorizontal === boardChecked[i][j]) {
+            console.log(`${startTokenHorizontal} is equal to ${boardChecked[i][j]}`)
+            
           } else {
-            break;
-          }
-          
+            console.log(`${startTokenHorizontal} is NOT equal to ${boardChecked[i][j]}`)
+            trueHorizontal = false;playGame.playRound()
+          } 
+          console.log("Hey")
         }
-        if (count == 3) {
-          console.log("Game over!")
+        if (trueHorizontal == true) {
+          console.log("We have a winner!")
         }
       }
     }
