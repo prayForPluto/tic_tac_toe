@@ -62,7 +62,7 @@ function playTicTacToe() {
       for (let i = 0; i < 3; i++) {
         let trueHorizontal = false;
         let trueVertical = false;
-        for (let j = 0; i < 3; j++) {
+        for (let j = 0; j < 3; j++) {
           //check if first in row has 3 consecutive tokens the same
           if (j == 0) {
             startTokenHorizontal = boardChecked[i][j];
@@ -70,17 +70,17 @@ function playTicTacToe() {
             console.log(startTokenHorizontal)
             continue;
           }
-          if (startTokenHorizontal === boardChecked[i][j]) {
+          if (startTokenHorizontal == boardChecked[i][j]) {
             console.log(`${startTokenHorizontal} is equal to ${boardChecked[i][j]}`)
             
           } else {
             console.log(`${startTokenHorizontal} is NOT equal to ${boardChecked[i][j]}`)
-            trueHorizontal = false;playGame.playRound()
+            trueHorizontal = false;
           } 
-          console.log("Hey")
         }
         if (trueHorizontal == true) {
           console.log("We have a winner!")
+          break;
         }
       }
     }
