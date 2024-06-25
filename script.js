@@ -59,10 +59,12 @@ function playTicTacToe() {
     const checkWin = () => {
       let startTokenHorizontal = "";
       let boardChecked = gameBoard.getBoard();
-      if ((boardChecked[0][0] == boardChecked[1][1] && 
-           boardChecked[0][0] == boardChecked[2][2]) || 
-          (boardChecked[0][2] == boardChecked[1][1] && 
-           boardChecked[0][2] == boardChecked[2][0]))  {
+      if (
+        (boardChecked[0][0] == boardChecked[1][1] && 
+         boardChecked[0][0] == boardChecked[2][2]) || 
+        (boardChecked[0][2] == boardChecked[1][1] && 
+         boardChecked[0][2] == boardChecked[2][0])
+      ) {
         return console.log("Game over! We have a winner")
       }
       for (let i = 0; i < 3; i++) {
