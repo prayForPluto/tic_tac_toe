@@ -93,6 +93,23 @@ function playTicTacToe() {
       }
     }
 
+    const displayController = (function () {
+      let body = document.querySelector("body");
+
+      let grid = document.createElement("div");
+      grid.setAttribute("class", "grid-container")
+      for (let i = 0; i < 9; i++) {
+        let gridElement = document.createElement("div");
+        gridElement.setAttribute("id", i);
+        gridElement.textContent = "testing";
+
+        grid.appendChild(gridElement);
+      }
+
+      body.appendChild(grid);
+
+    })();
+
     return { playRound }
 }
 
