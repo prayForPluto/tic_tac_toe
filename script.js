@@ -58,6 +58,7 @@ function playTicTacToe() {
 
     const checkWin = () => {
       let startTokenHorizontal = "";
+      let startTokenVertical = "";
       let boardChecked = gameBoard.getBoard();
       if (
         (boardChecked[0][0] == boardChecked[1][1] && 
@@ -74,7 +75,9 @@ function playTicTacToe() {
           //check if first in row has 3 consecutive tokens the same
           if (j == 0) {
             startTokenHorizontal = boardChecked[i][j];
+            startTokenVertical = boardChecked[j][i];
             trueHorizontal = true;
+            trueVertical = true;
             continue;
           }
           if (startTokenHorizontal == boardChecked[i][j]) {
@@ -85,8 +88,16 @@ function playTicTacToe() {
             trueHorizontal = false;
           } 
           console.log(j)
+
+          if (startTokenVertical == boardChecked[j][i]) {
+            console.log(`${startTokenVertical} is equal to ${boardChecked[j][i]}`)
+          } else {
+            trueVertical = false;
+          }
         }
-        if (trueHorizontal == true) {
+        if (trueHorizontal == true || trueVertical == true) {
+          console.log(`True horizontal: ${trueHorizontal}`)
+          console.log(`True vertical: ${trueVertical}`)
           console.log("We have a winner!")
           break;
         }
