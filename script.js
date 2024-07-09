@@ -106,25 +106,37 @@ function playTicTacToe() {
 
     const displayController = (function () {
       let body = document.querySelector("body");
-
       let grid = document.createElement("div");
+    
+      let aBoard = gameBoard.getBoard();
+    
       grid.setAttribute("class", "grid-container")
       for (let i = 0; i < 9; i++) {
         let gridElement = document.createElement("div");
         gridElement.setAttribute("id", i);
-        gridElement.textContent = "testing";
-
+        gridElement.textContent = "t";
+    
         grid.appendChild(gridElement);
       }
 
+      let playButton = document.createElement("button");
+      playButton.addEventListener("click", () => {
+        playRound();
+      })
+
+
       body.appendChild(grid);
+      body.appendChild(playButton);
 
     })();
 
     return { playRound }
 }
-
 const playGame = playTicTacToe(); 
+
+
+
+
 
 /*
 ** The Gameboard represents the state of the board
