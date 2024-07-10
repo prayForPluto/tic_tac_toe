@@ -42,18 +42,20 @@ function playTicTacToe() {
     const getActivePlayer = () => activePlayer;
 
     const playRound = () => {
-      gameBoard.addTurn();
-      let locX = prompt("Pick a row: ")
-      let locY = prompt("Pick a column: ")
+      window.addEventListener("click", (e) => { 
+        gameBoard.addTurn();
+        let locX = prompt("Pick a row: ")
+        let locY = prompt("Pick a column: ")
 
-      gameBoard.placePiece(locX, locY);
-      switchPlayerTurn();
+        gameBoard.placePiece(locX, locY);
+        switchPlayerTurn();
 
-      console.log(gameBoard);
-      console.log(`The turn is: ${gameBoard.getTurn()}`)
-      if (gameBoard.getTurn() > 5) {
-        checkWin();
-      }
+        console.log(gameBoard);
+        console.log(`The turn is: ${gameBoard.getTurn()}`)
+        if (gameBoard.getTurn() > 5) {
+          checkWin();
+        }
+      })
     }
 
     const checkWin = () => {
@@ -115,11 +117,16 @@ function playTicTacToe() {
         let gridElement = document.createElement("div");
         gridElement.setAttribute("id", i);
         gridElement.textContent = "t";
+        gridElement.addEventListener("click", () => {
+          console.log("I'm here!");
+          alert(gridElement.id);
+        })
     
         grid.appendChild(gridElement);
       }
 
       let playButton = document.createElement("button");
+      playButton.textContent = "Play round!"
       playButton.addEventListener("click", () => {
         playRound();
       })
