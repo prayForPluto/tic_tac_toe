@@ -41,21 +41,20 @@ function playTicTacToe() {
     };
     const getActivePlayer = () => activePlayer;
 
-    const playRound = () => {
-      window.addEventListener("click", (e) => { 
-        gameBoard.addTurn();
-        let locX = prompt("Pick a row: ")
-        let locY = prompt("Pick a column: ")
+    const playRound = (x, y) => {
+      gameBoard.addTurn();
+      let locX = x
+      let locY = y
 
-        gameBoard.placePiece(locX, locY);
-        switchPlayerTurn();
+      gameBoard.placePiece(x, y);
+      switchPlayerTurn();
 
-        console.log(gameBoard);
-        console.log(`The turn is: ${gameBoard.getTurn()}`)
-        if (gameBoard.getTurn() > 5) {
-          checkWin();
-        }
-      })
+      console.log(gameBoard);
+      console.log(`The turn is: ${gameBoard.getTurn()}`)
+      if (gameBoard.getTurn() > 5) {
+        checkWin();
+      }
+      
     }
 
     const checkWin = () => {
@@ -82,20 +81,22 @@ function playTicTacToe() {
             trueVertical = true;
             continue;
           }
-          if (startTokenHorizontal == boardChecked[i][j]) {
+          if (startTokenHorizontal == boardChecked[i][j] && startTokenHorizontal != "") {
             console.log(`${startTokenHorizontal} is equal to ${boardChecked[i][j]}`)
             
           } else {
-            console.log(`${startTokenHorizontal} is NOT equal to ${boardChecked[i][j]}`)
+            //console.log(`${startTokenHorizontal} is NOT equal to ${boardChecked[i][j]}`)
             trueHorizontal = false;
+            
           } 
           console.log(j)
 
-          if (startTokenVertical == boardChecked[j][i]) {
+          if (startTokenVertical == boardChecked[j][i] && startTokenVertical != "") {
             console.log(`${startTokenVertical} is equal to ${boardChecked[j][i]}`)
           } else {
             trueVertical = false;
           }
+          
         }
         if (trueHorizontal == true || trueVertical == true) {
           console.log(`True horizontal: ${trueHorizontal}`)
@@ -113,16 +114,21 @@ function playTicTacToe() {
       let aBoard = gameBoard.getBoard();
     
       grid.setAttribute("class", "grid-container")
-      for (let i = 0; i < 9; i++) {
-        let gridElement = document.createElement("div");
-        gridElement.setAttribute("id", i);
-        gridElement.textContent = "t";
-        gridElement.addEventListener("click", () => {
-          console.log("I'm here!");
-          alert(gridElement.id);
-        })
-    
-        grid.appendChild(gridElement);
+      for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+          let gridElement = document.createElement("div");
+          gridElement.setAttribute("id", `${i}${j}`);
+          gridElement.textContent = "";
+          gridElement.addEventListener("click", () => {
+            let id = gridElement.id;
+            let x = Number(id[0]);
+            let y = Number(id[1]);
+            playRound(x, y);
+            gridElement.textContent = aBoard[x][y];
+          })
+      
+          grid.appendChild(gridElement);
+        }
       }
 
       let playButton = document.createElement("button");
