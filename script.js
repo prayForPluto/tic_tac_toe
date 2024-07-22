@@ -36,6 +36,13 @@ function playTicTacToe() {
 
     let activePlayer = players[0];
 
+    let winner = "";
+
+    const setWinner = (theWinner) => {
+      winner = theWinner;
+    }
+    const getWinner = () => winner;
+
     const switchPlayerTurn = () => {
       activePlayer = activePlayer === players[0] ? players[1] : players[0];
     };
@@ -98,13 +105,17 @@ function playTicTacToe() {
           }
           
         }
-        if (trueHorizontal == true || trueVertical == true) {
-          console.log(`True horizontal: ${trueHorizontal}`)
-          console.log(`True vertical: ${trueVertical}`)
-          console.log("We have a winner!")
+        if (trueHorizontal == true) {
+          setWinner(startTokenHorizontal);
+          console.log(`We have a winner! ${getWinner()}`)
+          break;
+        } else if (trueVertical == true) {
+          setWinner(startTokenVertical);
+          console.log(`We have a winner! ${getWinner()}`);
           break;
         }
       }
+      
     }
 
     const displayController = (function () {
@@ -124,6 +135,11 @@ function playTicTacToe() {
             let x = Number(id[0]);
             let y = Number(id[1]);
             playRound(x, y);
+            if (getWinner()) {
+              let winner = document.createElement("p");
+              winner.textContent = `Winner winner! ${getWinner()}  gets a chicken dinner!`;
+              body.append(winner)
+            }
             gridElement.textContent = aBoard[x][y];
           })
       
@@ -132,9 +148,9 @@ function playTicTacToe() {
       }
 
       let playButton = document.createElement("button");
-      playButton.textContent = "Play round!"
+      playButton.textContent = "Play game!"
       playButton.addEventListener("click", () => {
-        playRound();
+        window.location.reload();
       })
 
 
@@ -143,7 +159,7 @@ function playTicTacToe() {
 
     })();
 
-    return { playRound }
+  //return { getWinner, setWinner };
 }
 const playGame = playTicTacToe(); 
 
